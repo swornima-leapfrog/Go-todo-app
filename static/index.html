@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="todo-container">
+        <h1 class="todo-title">To-Do List</h1>
+        <div class="todo-input-container">
+          <input
+            id="add-todo"
+            type="text"
+            class="todo-input"
+            placeholder="Enter your todo"
+          />
+          <button class="todo-button" onclick="addTodo()">Add</button>
+        </div>
+
+        <button class="read" onclick="markAllAsRead()">Mark all as read</button>
+
+        <div class="display-todo">
+          {{if lt (len .) 1}}
+          <p class="no-todo">No Todo to be shown.</p>
+          {{else}}
+          <ul class="todo-list">
+            {{range .}}
+            <li class="todo-item">
+              <input
+                {{if
+                .Done}}checked{{end}}
+                type="checkbox"
+                class="checkbox"
+                id="{{.Id}}"
+                onclick="toggleTodo(event)"
+              />
+              <label for="{{.Id}}" class="todo-label">{{.Title}}</label>
+              <button
+                class="delete-button"
+                id="{{.Id}}"
+                onclick="deleteTodo(event)"
+              >
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </li>
+            {{end}}
+          </ul>
+          {{end}}
+        </div>
+      </div>
+    </div>
+    <script src="static/js/script.js"></script>
+     
+  </body>
+</html>
